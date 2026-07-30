@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base-layout :: layout(~{::div.contenido-especifico})}">
+<body>
+    <div class="contenido-especifico">
+        <h2 style="color: #047857; text-align: center; margin-bottom: 20px;">¡Tu cuenta ha sido aprobada!</h2>
+        
+        <p style="color: #334155; font-size: 16px; line-height: 1.5;">¡Felicidades!</p>
+        <p style="color: #334155; font-size: 16px; line-height: 1.5;">Tu cuenta en <strong>Sobra Cero</strong> ha sido revisada y aprobada por un administrador.</p>
+        <p style="color: #334155; font-size: 16px; line-height: 1.5;">Aquí tienes tu contraseña provisoria para iniciar sesión:</p>
+        
+        <div style="text-align: center; margin: 40px 0;">
+            <span th:text="${contrasenaProvisoria}" style="background-color: #f1f5f9; color: #047857; padding: 16px 32px; border-radius: 8px; font-weight: bold; font-size: 20px; letter-spacing: 2px; display: inline-block;">
+                CONTRASEÑA
+            </span>
+        </div>
+        
+        <div style="text-align: center; margin-bottom: 30px;">
+            <a th:href="${loginUrl}" style="background-color: #0f172a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; display: inline-block;">
+                Ir a Iniciar Sesión
+            </a>
+        </div>
+        
+        <p style="color: #b91c1c; font-size: 14px; font-weight: bold; text-align: center;">Recuerda que se te pedirá cambiarla obligatoriamente cuando inicies sesión por primera vez.</p>
+    </div>
+</body>
+</html>
