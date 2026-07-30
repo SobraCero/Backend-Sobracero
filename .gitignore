@@ -34,3 +34,4 @@ docker-compose.local.yml
 Caddyfile.local
 
 /target
+/uploads
