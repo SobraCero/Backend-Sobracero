@@ -32,3 +32,5 @@ Thumbs.db
 
 docker-compose.local.yml
 Caddyfile.local
+
+/target
