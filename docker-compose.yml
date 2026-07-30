@@ -1,0 +1,73 @@
+services:
+  db-sobracero:
+    image: postgres:15-alpine
+    container_name: sobracero_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: sobracero_db
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  minio:
+    image: minio/minio
+    container_name: sobracero_minio
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: adminminio
+      MINIO_ROOT_PASSWORD: adminminiopassword
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+
+  backend:
+    build:
+      context: .
+    container_name: sobracero_backend
+    restart: unless-stopped
+    depends_on:
+      - db-sobracero
+      - minio
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-sobracero:5432/sobracero_db
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - MINIO_URL=http://minio:9000
+      - MINIO_ACCESS_NAME=adminminio
+      - MINIO_ACCESS_SECRET=adminminiopassword
+      - MINIO_BUCKET_NAME=imagenes-sobracero
+      - MINIO_BUCKET_DOCS=documentos-privados
+      - SPRING_MAIL_USERNAME=${MAIL_USERNAME}
+      - SPRING_MAIL_PASSWORD=${MAIL_PASSWORD}
+      - SPRING_MAIL_HOST=${MAIL_HOST:-smtp.gmail.com}
+      - SPRING_MAIL_PORT=${MAIL_PORT:-587}
+      - FRONTEND_URL=${FRONTEND_URL:-https://sobrecero-web.xyz}
+  frontend:
+    build:
+      context: ../frontend-sobra-cero
+    container_name: sobracero_frontend
+    restart: unless-stopped
+
+  caddy-proxy:
+    image: caddy:2-alpine
+    container_name: sobracero_caddy
+    restart: unless-stopped
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME:-sobrecero-web.xyz}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - frontend
+      - backend
+
+volumes:
+  postgres_data:
+  minio_data:
+  caddy_data:
+  caddy_config:

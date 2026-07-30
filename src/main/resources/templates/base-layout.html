@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(contenido)">
+<head>
+    <meta charset="UTF-8">
+    <title>Sobra Cero</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #fafaf9; padding: 40px 0; margin: 0;">
+
+    <div style="max-width: 600px; margin: auto; padding: 40px; border: 1px solid #e2e8f0; border-radius: 16px; background-color: #ffffff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+        
+        <!-- HEADER ESTÁNDAR -->
+        <div style="text-align: center; margin-bottom: 30px;">
+            <h1 style="color: #047857; margin: 0; font-size: 28px; font-weight: 900; letter-spacing: -1px;">Sobra Cero</h1>
+            <p style="color: #64748b; font-size: 14px; margin-top: 5px;">Plataforma de Rescate de Alimentos</p>
+        </div>
+
+        <!-- AQUÍ SE INYECTA EL CONTENIDO ESPECÍFICO DE CADA CORREO -->
+        <div th:replace="${contenido}"></div>
+
+        <!-- FOOTER ESTÁNDAR -->
+        <div style="border-top: 1px solid #e2e8f0; margin-top: 30px; padding-top: 20px; text-align: center;">
+            <p style="color: #64748b; font-size: 12px; margin: 5px 0;">Este es un correo generado automáticamente. Por favor, no respondas a esta dirección.</p>
+            <p style="color: #64748b; font-size: 12px; margin: 5px 0;">&copy; 2026 Sobra Cero - Todos los derechos reservados.</p>
+        </div>
+        
+    </div>
+
+</body>
+</html>

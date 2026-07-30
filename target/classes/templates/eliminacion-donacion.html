@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base-layout :: layout(~{::div.contenido-especifico})}">
+<body>
+    <div class="contenido-especifico">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <svg style="width: 48px; height: 48px; color: #dc2626; margin: 0 auto;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+        </div>
+        <h2 style="color: #dc2626; text-align: center; margin-bottom: 20px;">Donación Eliminada</h2>
+        
+        <p style="color: #334155; font-size: 16px; line-height: 1.5;">Hola,</p>
+        <p style="color: #334155; font-size: 16px; line-height: 1.5;">Te informamos que tu publicación de donación: <strong th:text="${nombreDonacion}">Nombre de la Donación</strong> ha sido eliminada por el administrador de <strong>Sobra Cero</strong>.</p>
+        
+        <div style="background-color: #fef2f2; border-left: 4px solid #ef4444; padding: 16px; margin: 30px 0;">
+            <p style="color: #b91c1c; font-size: 15px; margin: 0;">Esto suele ocurrir si la publicación incumple con nuestros términos y condiciones o por motivos de seguridad alimentaria. Las reservas vinculadas han sido canceladas.</p>
+        </div>
+        
+        <p style="color: #334155; font-size: 16px; line-height: 1.5;">Si consideras que esto es un error o necesitas más información, por favor contacta a soporte.</p>
+    </div>
+</body>
+</html>
